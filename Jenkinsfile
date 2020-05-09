@@ -46,7 +46,7 @@ pipeline {
     stage ('DAST') {
       steps {
         sshagent(['zap']) {
-         sh 'ssh madan@192.168.126.32'
+         sh 'ssh -tt madan@192.168.126.32'
         }
       }
   	  
