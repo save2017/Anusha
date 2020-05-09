@@ -12,6 +12,13 @@ pipeline {
             ''' 
       }
     }
+    stage ('Check-Git-Secrets') {
+	steps {
+		sh 'rm trufflelog || true'
+		sh 'docker run gesellix/trufflehog --json --regex https://github.com/save2017/Anusha.git > trufflehog'
+		sh 'cat trufflehog'
+		}
+			}
     
     stage ('SAST') {
       steps {
