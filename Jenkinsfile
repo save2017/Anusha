@@ -14,7 +14,7 @@ pipeline {
     }
     
     stage ('Build'){
-     sh 'Eun Clean Package'
+     sh 'Mvn Clean Package'
     }
     
   }
