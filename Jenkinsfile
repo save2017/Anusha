@@ -57,7 +57,7 @@ pipeline {
 stage ('DAST-Report') {
       steps {
         sshagent(['ZAP1']) {
-         sh 'ssh -o  StrictHostKeyChecking=no root@192.168.126.32'
+         sh 'ssh -tt -o  StrictHostKeyChecking=no root@192.168.126.32'
         }
 	}
 }
