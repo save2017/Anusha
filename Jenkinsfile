@@ -57,7 +57,7 @@ pipeline {
 stage ('DAST-Report') {
       steps {
         sshagent(['ZAP1']) {
-         sh 'ssh -o  StrictHostKeyChecking=no root@192.168.126.32 " zaproxy  -daemon -quickurl http://192.168.127.193:8080/webapp/ -quickout /path/to/report.xml" || true'
+         sh 'ssh -o  StrictHostKeyChecking=no root@192.168.126.32'
         }
 	}
 }
