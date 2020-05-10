@@ -20,14 +20,6 @@ pipeline {
 		}
 			}
     
-    stage ('SAST') {
-      steps {
-        withSonarQubeEnv('Sonarqube') {
-          sh 'mvn sonar:sonar'
-          sh 'cat target/sonar/report-task.txt'
-        }
-      }
-    }
     stage('Source-Composition-analysis'){
 	steps{
 		sh 'rm owasp* || true'
