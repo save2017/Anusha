@@ -22,6 +22,7 @@ pipeline {
     
     stage('Source-Composition-analysis'){
 	steps{
+		sh 'mvn clean'
 		sh 'rm owasp* || true'
 		sh 'wget "https://raw.githubusercontent.com/save2017/Anusha/master/owasp-dependency-check.sh" '
 		sh 'chmod +x owasp-dependency-check.sh'
