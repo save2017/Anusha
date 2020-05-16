@@ -55,6 +55,7 @@
         <h2>hello devops</h2>
         <h3>team</h3>
         <p>This is from dev branch. </p>
+        <p2>This is change from eclipse</p2>
         <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
     </div>
 </div>
