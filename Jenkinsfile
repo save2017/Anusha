@@ -49,9 +49,6 @@ pipeline {
             steps {
            sshagent(['tomcat']) {
                 sh 'scp -o StrictHostKeyChecking=no target/*.war root@192.168.127.193:/prod/apache-tomcat-8.5.54/webapps/webapp.war'
-		sh 'ssh root@192.168.127.193'
-		sh 'cd /prod/apache-tomcat-8.5.54/webapps/'
-		sh 'docker build -t test123 .' 
               }      
            }       
     }
