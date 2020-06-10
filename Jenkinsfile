@@ -57,10 +57,12 @@ pipeline {
   
      stage ('Deploy-To-Kubernetes') {
             steps {
+	      sshagent(['ZAP']) {
                    sh 'scp -o StrictHostKeyChecking=no *.tar root@192.168.127.227:/'
 		  }
 		}
-
+              }
+	  
     stage ('DAST') {
       steps {
         sshagent(['ZAP']) {
