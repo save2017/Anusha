@@ -55,6 +55,11 @@ pipeline {
            }       
     }
   
+     stage ('Deploy-To-Kubernetes') {
+            steps {
+                   sh 'scp -o StrictHostKeyChecking=no *.tar root@192.168.127.227:/root'
+		  }
+		}
 
     stage ('DAST') {
       steps {
