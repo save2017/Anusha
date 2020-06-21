@@ -53,6 +53,14 @@ pipeline {
            }       
     }
   
+	stage ('Building Docker images') {
+            steps {
+           	    sh 'rm /root/docker/*.war'
+		    sh 'docker rmi -f webappimage:latest'
+		    sh 'cp target/*.war /root/docker/webapp.war'  
+		    sh 'docker build --tag webappimage:latest /root/docker/.'    
+           }       
+    }
      
 	  
     stage ('DAST') {
