@@ -55,10 +55,10 @@ pipeline {
   
        stage ('Building Docker images') {
             steps {
-           	    sh 'rm docker/*.war'
+           	    sh 'rm /root/docker/*.war'
 		    sh 'docker rmi -f webappimage:latest'
-		    sh 'cp target/*.war docker/webapp.war'  
-		    sh 'docker build --tag webappimage:latest docker/.'    
+		    sh 'cp target/*.war /root/docker/webapp.war'  
+		    sh 'docker build --tag webappimage:latest /root/docker/.'    
            }       
     }
      
