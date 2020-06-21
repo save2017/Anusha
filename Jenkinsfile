@@ -53,12 +53,12 @@ pipeline {
            }       
     }
   
-	stage ('Building Docker images') {
+       stage ('Building Docker images') {
             steps {
-           	    sh 'rm /root/docker/*.war'
+           	    sh 'rm /var/lib/jenkins/docker/*.war'
 		    sh 'docker rmi -f webappimage:latest'
-		    sh 'cp target/*.war /root/docker/webapp.war'  
-		    sh 'docker build --tag webappimage:latest /root/docker/.'    
+		    sh 'cp target/*.war /var/lib/jenkins/docker/webapp.war'  
+		    sh 'docker build --tag webappimage:latest /var/lib/jenkins/docker/.'    
            }       
     }
      
