@@ -64,6 +64,14 @@ pipeline {
 		    sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'    
            }       
     }
+	  
+	        stage ('Pushing to dockerhub') {
+            steps {
+           	    sh 'docker login'
+		    sh 'docker tag webappimage:$docker_tag jackheal445/webappimage:$docker_tag'
+		    sh 'docker push jackheal445/webappimage:$docker_tag'    
+           }       
+    }
      
 	  
     stage ('DAST') {
