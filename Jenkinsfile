@@ -2,6 +2,8 @@ pipeline {
   agent any 
 	environment {
 	docker_tag=getDockerTag()
+	 USERNAME = credentials('DOCKER_USERNAME')
+         PASSWORD = credentials('DOCKER_PASSWORD')
 	}
   tools {
     maven 'Maven'
@@ -67,7 +69,7 @@ pipeline {
 	  
 	        stage ('Pushing to dockerhub') {
             steps {
-           	    sh 'docker login'
+           	    sh 'docker login u ${USERNAME} -p ${PASSWORD} dockerregistry.cloud.remote'
 		    sh 'docker tag webappimage:$docker_tag jackheal445/webappimage:$docker_tag'
 		    sh 'docker push jackheal445/webappimage:$docker_tag'    
            }       
