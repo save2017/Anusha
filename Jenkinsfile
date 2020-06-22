@@ -61,7 +61,7 @@ pipeline {
            	    sh 'rm /opt/docker/*.war'
 		    sh 'docker rmi -f webappimage:latest'
 		    sh 'cp target/*.war /opt/docker/webapp.war'  
-		    sh 'docker build /opt/docker/. --tag webappimage:latest:$docker_tag'    
+		    sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'    
            }       
     }
      
