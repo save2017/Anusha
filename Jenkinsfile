@@ -83,9 +83,9 @@ pipeline {
 		     sh 'scp -o StrictHostKeyChecking=no services.yml kubapppod.yml root@192.168.127.227:/opt/kube/'
 			    script{
 				    try{
-					    sh 'ssh root@192.168.127.227 kubectl apply -f /opt/kube/.'
+					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "kubectl apply -f /opt/kube/."'
 				    }catch(error){
-				    	    sh 'ssh root@192.168.127.227 kubectl create -f /opt/kube/.'
+				    	    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "kubectl create -f /opt/kube/."'
 				    }
 			    }
 			  
