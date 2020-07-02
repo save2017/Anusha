@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubapp
+  labels:
+    app: kubapp
+spec:
+  containers:
+    - name: kubapp
+      image: jackheal445/webappimage:tagVersion
+      ports:
+        - containerPort: 8080
