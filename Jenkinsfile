@@ -74,6 +74,24 @@ pipeline {
 		    sh 'docker push jackheal445/webappimage:$docker_tag'    
            }       
     }
+	  
+	  stage('k8s'){
+		  steps{
+		    sh 'chmod +x changetag.sh'
+	            sh './changetag.sh ${docker_tag}'
+	            sshagent(['kubernetes']){
+		     sh 'scp -o StrictHostKeyChecking=no services.yml kubapppod.yml root@192.168.127.227:/root/'
+			    script{
+				    try{
+					    sh 'ssh root@192.168.127.227 kubectl apply -f .'
+				    }catch(error){
+				    	    sh 'ssh root@192.168.127.227 kubectl create -f .'
+				    }
+			    }
+			  
+			  }
+		  }
+	  }
      
 	  
     stage ('DAST') {
