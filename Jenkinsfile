@@ -54,7 +54,6 @@ pipeline {
             steps {
            sshagent(['tomcat']) {
                 sh 'scp -o StrictHostKeyChecking=no target/*.war root@192.168.127.193:/prod/apache-tomcat-8.5.54/webapps/webapp.war'
-		   sh 'scp -o StrictHostKeyChecking=no services.yml kubapppod.yml root@192.168.127.193:/prod/apache-tomcat-8.5.54/webapps/'
               }      
            }       
     }
@@ -81,12 +80,12 @@ pipeline {
 		    sh 'chmod +x changetag.sh'
 	            sh './changetag.sh ${docker_tag}'
 	            sshagent(['kubernetes']){
-		     sh 'scp -o StrictHostKeyChecking=no services.yml kubapppod.yml root@192.168.127.227:/kube/'
+		     sh 'scp -o StrictHostKeyChecking=no services.yml kubapppod.yml root@192.168.127.227:/opt/kube/'
 			    script{
 				    try{
-					    sh 'ssh root@192.168.127.227 kubectl apply -f /kube/.'
+					    sh 'ssh root@192.168.127.227 kubectl apply -f /opt/kube/.'
 				    }catch(error){
-				    	    sh 'ssh root@192.168.127.227 kubectl create -f /kube/.'
+				    	    sh 'ssh root@192.168.127.227 kubectl create -f /opt/kube/.'
 				    }
 			    }
 			  
