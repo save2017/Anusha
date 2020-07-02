@@ -80,12 +80,12 @@ pipeline {
 		    sh 'chmod +x changetag.sh'
 	            sh './changetag.sh ${docker_tag}'
 	            sshagent(['kubernetes']){
-		     sh 'scp -o StrictHostKeyChecking=no services.yml kubapppod.yml root@192.168.127.227:/root/'
+		     sh 'scp -o StrictHostKeyChecking=no services.yml kubapppod.yml root@192.168.127.227:/kube/'
 			    script{
 				    try{
-					    sh 'ssh root@192.168.127.227 kubectl apply -f .'
+					    sh 'ssh root@192.168.127.227 kubectl apply -f /kube/.'
 				    }catch(error){
-				    	    sh 'ssh root@192.168.127.227 kubectl create -f .'
+				    	    sh 'ssh root@192.168.127.227 kubectl create -f /kube/.'
 				    }
 			    }
 			  
