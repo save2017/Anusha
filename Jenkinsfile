@@ -75,6 +75,15 @@ pipeline {
            }       
     }
 	  
+	  	  stage ('Container scanning') {
+            steps {
+		       sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+		       sh 'docker tag webappimage:$docker_tag aquascan/webappimage:latest'
+           	       aquaMicroscanner imageName: 'aquascan/webappimage:latest', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html' 
+           }
+			}
+	  
+	  
 	  stage('k8s'){
 		  steps{
 		    sh 'chmod +x changetag.sh'
