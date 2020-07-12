@@ -60,17 +60,10 @@ pipeline {
   
        stage ('Building Docker images') {
             steps {
-		    scrpit{
-			    try{
-           	    			sh 'rm /opt/docker/*.war'
-		    			sh 'docker rmi -f webappimage:latest'
-		    			sh 'cp target/*.war /opt/docker/webapp.war'  
-		    			sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'
-			    }catch(error){
-			    		    sh 'cp target/*.war /opt/docker/webapp.war'  
-		    			    sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'
-			    }
-		    }
+           	    sh 'rm /opt/docker/*.war'
+		    sh 'docker rmi -f webappimage:latest'
+		    sh 'cp target/*.war /opt/docker/webapp.war'  
+		    sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'
            }       
     }
 	  
