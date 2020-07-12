@@ -60,10 +60,17 @@ pipeline {
   
        stage ('Building Docker images') {
             steps {
-           	    sh 'rm /opt/docker/*.war'
-		    sh 'docker rmi -f webappimage:latest'
-		    sh 'cp target/*.war /opt/docker/webapp.war'  
-		    sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'    
+		    scrpit{
+			    try{
+           	    			sh 'rm /opt/docker/*.war'
+		    			sh 'docker rmi -f webappimage:latest'
+		    			sh 'cp target/*.war /opt/docker/webapp.war'  
+		    			sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'
+			    }catch(error){
+			    		    sh 'cp target/*.war /opt/docker/webapp.war'  
+		    			    sh 'docker build --tag webappimage:$docker_tag /opt/docker/.'
+			    }
+		    }
            }       
     }
 	  
@@ -93,10 +100,10 @@ pipeline {
 			    script{
 				    try{
 					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl apply -f /opt/kube/."'
-					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl get svc'
+					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl get svc"'
 				    }catch(error){
 				    	    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl create -f /opt/kube/."'
-					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl get svc'
+					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl get svc"'
 				    }
 			    }
 			  
