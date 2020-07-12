@@ -93,10 +93,10 @@ pipeline {
 			    script{
 				    try{
 					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl apply -f /opt/kube/."'
-					    sh 'kubectl get svc'
+					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl get svc'
 				    }catch(error){
 				    	    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl create -f /opt/kube/."'
-					    sh 'kubectl get svc'
+					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl get svc'
 				    }
 			    }
 			  
