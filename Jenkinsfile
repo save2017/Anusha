@@ -75,7 +75,7 @@ pipeline {
            }       
     }
 	  
-	  	  stage ('Container scanning') {
+	  	  stage ('Aquascan Container scanning') {
             steps {
 		       sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
 		       sh 'docker tag webappimage:$docker_tag aquascan/webappimage:latest'
@@ -93,8 +93,10 @@ pipeline {
 			    script{
 				    try{
 					    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl apply -f /opt/kube/."'
+					    sh 'kubectl get svc'
 				    }catch(error){
 				    	    sh 'ssh -o  StrictHostKeyChecking=no root@192.168.127.227 "/snap/bin/kubectl create -f /opt/kube/."'
+					    sh 'kubectl get svc'
 				    }
 			    }
 			  
